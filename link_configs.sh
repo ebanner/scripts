@@ -7,6 +7,7 @@
 # NOTE: this script MUST be run in a `sudo' command
 
 ROOT=/root
+# put config files in here the you would like to be symlinked
 configs=(.vimrc .inputrc .bashrc .bash_profile .irssi)
 HOME=$(eval echo ~${SUDO_USER})
 
