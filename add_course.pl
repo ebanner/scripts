@@ -1,5 +1,11 @@
 #!/usr/bin/perl -w
-# this script depends that you have the ``perl-lwp-protocol-https" package installed
+# This script prompts a user for their Potsdam username, password, and a Course
+# Registration Number and attempts to register them for the course.  If
+# registration is unsuccessful, the user has the choice to continue attempting
+# to add the course at time intervals specified by the user.
+
+# this script depends that you have the ``perl-lwp-protocol-https", among other
+# packages installed
 
 use strict;
 use WWW::Mechanize;
@@ -18,7 +24,6 @@ sub print_links() {
 # takes in a URL string and prints it in a recognizable way
 sub print_URL() {
     print "... " . shift . " ...\n";
-
 }
 
 ## collect login information from user
