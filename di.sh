@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script allows the user to select a free playlists provided by di.fm by
+# This script allows the user to select a playlist provided by di.fm by
 # specifying a number as an argument.
 # Thanks to Chris Willig for the original idea!
 
@@ -57,6 +57,7 @@ function show_usage {
     echo "  44: Latin House"
     echo "  45: Oldschool Acid"
     echo "  46: Chiptunes"
+    exit 1
 }
 
 function get_playlist {
