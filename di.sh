@@ -229,3 +229,5 @@ wget -O $TEMP_PLS listen.di.fm/public3/${STREAM}.pls &&
 
 # remove the temporary playlist file
 rm $TEMP_PLS
+
+exit 0
