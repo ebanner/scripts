@@ -83,7 +83,7 @@ function get_playlist {
             STREAM=clubdubstep
             ;;
         5)
-            STREAM=progressiveplay
+            STREAM=progressivepsy
             ;;
         6)
             STREAM=trance
