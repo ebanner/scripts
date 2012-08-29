@@ -5,10 +5,14 @@
 # Thanks to Chris Willig for the original idea!
 
 function show_usage {
-    echo "Usage: di.sh [OPTION] ... [CHOICE]"
+    echo "Usage: di.sh <OPTION|CHOICE>"
     echo "Play a playlist file from di.fm"
     echo "CHOICE is an integer in the range [1,46]"
     echo "Example: di.sh 3"
+    echo
+    echo "OPTIONS:"
+    echo "  -h, --help      display this help and exit"
+    echo "  -r, --random    play a random playlist"
     echo
     echo "CHOICES:"
     echo "   1: Deep House"
@@ -57,6 +61,9 @@ function show_usage {
     echo "  44: Latin House"
     echo "  45: Oldschool Acid"
     echo "  46: Chiptunes"
+    echo
+    echo "Report bugs to bannerem195@potsdam.edu"
+    echo "Git repo: <git@github.com:ebanner/scripts.git>"
     exit 1
 }
 
@@ -201,6 +208,15 @@ function get_playlist {
         46)
             STREAM=chiptunes
             ;;
+        -h|--help)
+            show_usage
+            ;;
+        -r|--random)
+            get_playlist $(($RANDOM % 46 + 1))
+            ;;
+        *)
+            show_usage
+            ;;
     esac
 }
 
@@ -208,7 +224,7 @@ function get_playlist {
 trap "[ -f $TEMP_PLS ] && rm $TEMP_PLS" SIGINT SIGTERM
 
 # croak if no playlist number is given
-if [ $# -lt 1 ] ; then
+if [ $# -ne 1 ] ; then
     show_usage
 fi
 
