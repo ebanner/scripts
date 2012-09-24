@@ -4,3 +4,5 @@
 # directories deep (relative to either `/' or `~')
 
 pwd | sed "s#$HOME#~#" | awk -F"/" '{ if (NF>3) print $1 "/.../" $(NF-1) "/" $(NF); else print $0 }'
+
+exit 0

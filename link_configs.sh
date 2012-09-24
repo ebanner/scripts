@@ -29,3 +29,5 @@ do
         echo $config does not exist!
     fi
 done
+
+exit 0

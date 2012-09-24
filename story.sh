@@ -45,3 +45,5 @@ echo "Acceptance Criteria:"
 echo "Given ${given},"
 echo "When ${when}"
 echo "Then ${Then}."
+
+exit 0
