@@ -2,37 +2,38 @@
 
 # Driver behind learning visualizations on website
 #
-# 1. Pull down losses from condor
-# 2. Generate learning curves
-# 3. Convert notebooks to html
-# 4. Copy html notebooks to website
+# 1. Pull down experiment groups from condor and set environment variables
+# 2. Call notebooks to do plotting
+# 3. Copy resulting notebooks to website
 #
 #
+
+condor_path=/u/ebanner/scratch/code/cochrane-nlp/experiments/ct.gov/cnn/output
+
+# Fetch experiment data
+rm -rf /tmp/output
+scp -r submit64.cs.utexas.edu:$condor_path /tmp
 
 #added by Anaconda2 2.4.0 installer
 export PATH="/home/ebanner/.anaconda/bin:$PATH"
 source activate py27
 
 nb_dir=/home/ebanner/Research/code/cochranenlp/experiments/notebooks 
-
 cd $nb_dir
 
-# Hack for now until I figure out how to install this code so that it is
-# available system-wide!
-cp $nb_dir/{learning_vis,support}.py /tmp
-
-for nb in *.ipynb
+for EXP_GROUP in /tmp/output/*
 do
-    fname=${nb%.*} # extract just the filename
-    htmlized=${fname}.html
+    export EXPERIMENTS=$(ls $EXP_GROUP)
+    export EXP_GROUP=$(basename $EXP_GROUP)
 
-    cp "$nb" /tmp 
+    nb=${EXP_GROUP}.ipynb
+    cp Template.ipynb "$nb"
 
-    cd /tmp
     runipy -o "$nb"
     jupyter nbconvert --to html "$nb"
 
-    scp "$htmlized" linux.cs.utexas.edu:public_html/notebooks
+    fname=${nb%.*} # extract just the filename
+    htmlized=${fname}.html
 
-    cd $nb_dir # go back into the notebook dir!
+    scp "$htmlized" linux.cs.utexas.edu:public_html/notebooks
 done
